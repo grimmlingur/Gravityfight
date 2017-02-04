@@ -19,4 +19,31 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	void takeDamage(string tag){
+		if (tag == "Player1") {
+			player1Lives--;
+			livesCheck (tag);
+		} else {
+			player2Lives--;
+			livesCheck (tag);
+		}
+	}	
+
+	void livesCheck(string tag){
+		if (tag == "Player1") {
+			if (player1Lives == 0) {
+				Debug.Log ("Player 1 loses!!!!");
+			} else {
+				player1.GetComponentInChildren<player> ().respawn ();
+
+			}
+		} else {
+			if (player2Lives == 0) {
+				Debug.Log ("Player 2 loses!!!!");
+			} else {
+				player2.GetComponentInChildren<player> ().respawn ();
+			}
+		}
+	}
 }

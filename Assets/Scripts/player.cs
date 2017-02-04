@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class player : MonoBehaviour {
 
-	float speed = 5f;
-	float rotateSpeed = 3f;
+	Vector3 originPoint;
+	float speed             = 5f;
+	float rotateSpeed       = 3f;
+	float invincibilityTime = 2f;
+	float respawnTime       = 1f;
 	int controls;
+
 
 	// Use this for initialization
 	void Start () {
 		//Gets the controlScheme for the player. GetControlScheme returns either 0 or 1 based on where the 
 		//player is in the gameworld. If 0 then the player uses asd to control and if 1 then he uses jkl.
 		controls = GetControlScheme.getControls (gameObject.transform.position.x);
+		originPoint = gameObject.transform.position;
 	}
 	
 	// Update is called once per frame
@@ -33,5 +38,10 @@ public class player : MonoBehaviour {
 				gameObject.transform.Rotate (new Vector3 (0, rotateSpeed, 0));
 			}
 		}
+	}
+
+	public IEnumerator respawn(){
+		yield return new WaitForSeconds(respawnTime);
+		gameObject.transform.Translate (originPoint);
 	}
 }
