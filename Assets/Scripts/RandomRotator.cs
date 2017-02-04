@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class RandomRotator : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public float tumble;
+	private Rigidbody rb;
+	void Start(){
+		rb = GetComponent<Rigidbody> ();
+		rb.angularVelocity = Random.insideUnitSphere * tumble;
 	}
 }
+
