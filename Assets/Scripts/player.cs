@@ -40,8 +40,13 @@ public class player : MonoBehaviour {
 		}
 	}
 
-	public IEnumerator respawn(){
+	public void respawn(){
+		StartCoroutine(respawnCoroutine());
+	}
+
+	IEnumerator respawnCoroutine()
+	{
 		yield return new WaitForSeconds(respawnTime);
-		gameObject.transform.Translate (originPoint);
+		gameObject.transform.position = originPoint;
 	}
 }
