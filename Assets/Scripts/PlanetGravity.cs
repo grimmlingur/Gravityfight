@@ -27,4 +27,8 @@ public class PlanetGravity : MonoBehaviour {
 			rb.AddForce (direction.normalized * (gravitationalPull / distance) * rb.mass * Time.fixedDeltaTime);
 		}
 	}
+
+	void OnTriggerEnter(Collider other){
+		//call function in game controller with tag of player that hit the planet
+	}
 }
