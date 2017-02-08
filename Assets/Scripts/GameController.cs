@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class GameController : MonoBehaviour {
@@ -40,6 +41,9 @@ public class GameController : MonoBehaviour {
 			}else if (i.name == "Player2Lives") {
 				i.gameObject.GetComponent<Text> ().text = "Player 2 Lives: " + player2Lives;
 			}
+		}
+		if (Input.GetKeyDown (KeyCode.R) || Input.GetKeyDown (KeyCode.Space)) { 
+			SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
 		}
 	}
 
