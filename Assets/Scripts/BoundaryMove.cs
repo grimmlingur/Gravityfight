@@ -10,8 +10,16 @@ public class BoundaryMove : MonoBehaviour {
 	private float offsetY;
 
 	void Start(){
-		xBoundary = transform.position.x / 2;
-		yBoundary = transform.position.y / 2;
+		xBoundary = transform.localScale.x / 2;
+		yBoundary = transform.localScale.y / 2;
+
+		offsetX = xBoundary - 1;
+		offsetY = yBoundary - 1;
+	}
+
+	void FixedUpdate(){
+		xBoundary = transform.localScale.x / 2;
+		yBoundary = transform.localScale.y / 2;
 
 		offsetX = xBoundary - 1;
 		offsetY = yBoundary - 1;
