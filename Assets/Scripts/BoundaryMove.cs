@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoundaryMove : MonoBehaviour {
-	private float xBoundary = 35;
-	private float yBoundary = 20;
+	private float xBoundary;
+	private float yBoundary;
 
-	private float offsetX = 34;
-	private float offsetY = 19;
+	private float offsetX;
+	private float offsetY;
+
+	void Start(){
+		xBoundary = transform.position.x / 2;
+		yBoundary = transform.position.y / 2;
+
+		offsetX = xBoundary - 1;
+		offsetY = yBoundary - 1;
+	}
 
 	void OnTriggerExit(Collider other){
 		if ((other.transform.position.x < -xBoundary) || (other.transform.position.x > xBoundary)) {
