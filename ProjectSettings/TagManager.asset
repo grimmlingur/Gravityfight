@@ -8,6 +8,10 @@ TagManager:
   - Boundary
   - Player1
   - Player2
+  - UI
+  - EndUI
+  - Menu
+  - GameUI
   layers:
   - Default
   - TransparentFX

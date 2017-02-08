@@ -9,21 +9,37 @@ public class GameController : MonoBehaviour {
 
 	public GameObject player1;
 	public GameObject player2;
+	public AudioClip[] ambient;
 
 	int player1Lives = 3;
 	int player2Lives = 3;
+	bool gameStarted = false;
+	bool gameEnded 	 = false;
+	float audioTime  = 4;
+	float audioTimer = 7;
 
 	GameObject[] UIObjects;
 	GameObject[] EndUIObjects;
+	GameObject[] MenuObjects;
+	AudioSource source;
 
 	// Use this for initialization
 	void Start () {
-		UIObjects   = GameObject.FindGameObjectsWithTag("UI");
-		EndUIObjects    = GameObject.FindGameObjectsWithTag("EndUI");
+		Time.timeScale = 0;
+		UIObjects    = GameObject.FindGameObjectsWithTag("GameUI");
+		EndUIObjects = GameObject.FindGameObjectsWithTag("EndUI");
+		MenuObjects  = GameObject.FindGameObjectsWithTag("Menu");
+
+		source = GetComponent<AudioSource> ();
+
+		foreach(GameObject i in UIObjects){
+			i.SetActive(false);
+		}
 
 		foreach(GameObject i in EndUIObjects){
 			i.SetActive(false);
 		}
+
 		foreach(GameObject i in UIObjects){
 			if (i.name == "Player1Lives") {
 				i.gameObject.GetComponent<Text> ().text = "Player 1 Lives: " + player1Lives;
@@ -35,15 +51,49 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		foreach(GameObject i in UIObjects){
-			if (i.name == "Player1Lives") {
-				i.gameObject.GetComponent<Text> ().text = "Player 1 Lives: " + player1Lives;
-			}else if (i.name == "Player2Lives") {
-				i.gameObject.GetComponent<Text> ().text = "Player 2 Lives: " + player2Lives;
+		if (gameEnded) {
+			if (Input.GetKeyDown (KeyCode.R) || Input.GetKeyDown (KeyCode.Space)) {
+				SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.R) || Input.GetKeyDown (KeyCode.Space)) { 
-			SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+		if (gameStarted) {
+			foreach (GameObject i in UIObjects) {
+				if (i.name == "Player1Lives") {
+					i.gameObject.GetComponent<Text> ().text = "Player 1 Lives: " + player1Lives;
+				} else if (i.name == "Player2Lives") {
+					i.gameObject.GetComponent<Text> ().text = "Player 2 Lives: " + player2Lives;
+				}
+			}
+			if (Input.GetKeyDown(KeyCode.Escape)) { 
+				SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+				Application.Quit ();
+			}
+		} else {
+			if (Input.anyKey) {
+				gameStarted = true;
+				Time.timeScale = 1;
+
+				foreach(GameObject i in UIObjects){
+					i.SetActive(true);
+				}
+
+				foreach(GameObject i in MenuObjects){
+					i.SetActive(false);
+				}
+
+			}
+		}
+
+		ambientMusic ();
+	}
+
+	void ambientMusic(){
+		if (gameStarted) {
+			if (audioTimer >= audioTime) {
+				source.PlayOneShot (ambient [Random.Range (0, 8)], 1f);
+				audioTimer = 0;
+			}
+			audioTimer += Time.deltaTime;
 		}
 	}
 
@@ -87,5 +137,7 @@ public class GameController : MonoBehaviour {
 				}
 			}
 		}
+		gameEnded = true;
+		Time.timeScale = 0;
 	}
 }

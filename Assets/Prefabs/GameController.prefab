@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4248484632888576}
   - component: {fileID: 114805815281057686}
+  - component: {fileID: 81704927750109398}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -40,6 +41,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &81704927750109398
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1879146240489264}
+  m_Enabled: 1
 --- !u!114 &114805815281057686
 MonoBehaviour:
   m_ObjectHideFlags: 1
