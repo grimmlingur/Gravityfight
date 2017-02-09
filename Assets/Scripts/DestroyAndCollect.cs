@@ -10,6 +10,10 @@ public class DestroyAndCollect : MonoBehaviour {
 		}
 		//If asteroid is uncollected
 
+		if (gameObject.tag == "Uncollected") {
+			return;
+		}
+
 		if (gameObject.tag == "Player1") {
 			if (other.gameObject.tag == "Player2") {
 				FindObjectOfType<GameController> ().takeDamage (other.gameObject.tag);

@@ -23,6 +23,7 @@ public class player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		gameObject.transform.position += gameObject.transform.forward * speed * Time.deltaTime;
+		//Debug.Log (gameObject.transform.position);
 		if (controls == 0) {
 			if (Input.GetKey (KeyCode.A)) {
 				gameObject.transform.Rotate (new Vector3 (0, -rotateSpeed, 0));
