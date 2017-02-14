@@ -10,6 +10,9 @@ TagManager:
   - EndUI
   - Menu
   - GameUI
+  - Player1
+  - Player2
+  - Uncollected
   layers:
   - Default
   - TransparentFX

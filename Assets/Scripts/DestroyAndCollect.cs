@@ -8,8 +8,8 @@ public class DestroyAndCollect : MonoBehaviour {
 
     void Start()
     {
-        Debug.Log("Asteroid exists");
     }
+
 	void OnTriggerEnter(Collider other){
         Debug.Log("Colliding with: "+ other.tag);
 		if (other.gameObject.CompareTag("Boundary")) {
@@ -32,14 +32,16 @@ public class DestroyAndCollect : MonoBehaviour {
 
 		if (gameObject.tag == "Player1") {
 			if (other.gameObject.tag == "Player2") {
+                Debug.Log("Player 2 takes damage");
 				FindObjectOfType<GameController> ().takeDamage (other.gameObject.tag);
 			}
 		} else if (gameObject.tag == "Player2") {
 			if (other.gameObject.tag == "Player1") {
+                Debug.Log("Player 1 takes damage");
 				FindObjectOfType<GameController> ().takeDamage (other.gameObject.tag);
 			}
 		}
 		//Should asteroids destroy each other?
-		Destroy (gameObject);
+		//Destroy (gameObject);
 	}
 }

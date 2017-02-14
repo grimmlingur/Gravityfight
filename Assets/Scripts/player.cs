@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class player : MonoBehaviour {
 
-<<<<<<< HEAD
     private class Node {
         public Node next;
         public GameObject asteroid;
@@ -32,14 +31,11 @@ public class player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-<<<<<<< HEAD
 		//gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * speed * Time.deltaTime);
 		//gameObject.transform.position += gameObject.transform.forward * speed * Time.deltaTime;
         
 
-=======
 		gameObject.transform.position += gameObject.transform.forward * speed * Time.deltaTime;
-		Debug.Log (gameObject.transform.forward);
 		if (controls == 0) {
 			if (Input.GetKey (KeyCode.A)) {
 				gameObject.transform.Rotate (new Vector3 (0, -rotateSpeed, 0));
@@ -71,37 +67,37 @@ public class player : MonoBehaviour {
 
     public void attach(GameObject other,float distbehind)
     { 
-        Node finger;
-        if( list==null)
-        {
-            Node list= new Node();
-            list.asteroid=other;
-        }
-        else
-        {
-            finger=list;
-            while(true)
-            {
-                if(finger.next==null)
-                    break;
-                finger=finger.next;
-            }
-            Node addition= new Node();
-            addition.asteroid=other;
-            finger.next=addition; 
+        other.tag=gameObject.tag;
+        Debug.Log("In Attach");
         
-        if(finger==null)
-        {
+        //if finger is null, then list is empty
+        
+        
+        if(list==null)
+        {//player has no asteroids
+
             //attach joint to ship
-            Debug.Log("in attach");
             //TODO: add chain of asteroids to belong to player
+
+            //moving the asteroid behind the player
+            Transform additiontransform=other.GetComponent<Transform>();
+            additiontransform.position=gameObject.transform.position-gameObject.transform.forward*distbehind;
+            //creating the joint
             gameObject.AddComponent<HingeJoint>();
             HingeJoint joint=GetComponent<HingeJoint>();
             joint.connectedBody=other.GetComponent<Rigidbody>();
             //gameObject.AddComponent<SpringJoint>();
             //SpringJoint joint=GetComponent<SpringJoint>();
+            Debug.Log("We are about to connect the following bodies");
+            Debug.Log(gameObject);
+            Debug.Log(other);
             joint.connectedBody=other.GetComponent<Rigidbody>();
             joint.anchor=new Vector3(0,0,-distbehind);
+
+            //asteroid is attached, now adding it to list
+            list= new Node();
+            list.asteroid=other;
+            
         }
         else
         {
@@ -111,7 +107,7 @@ public class player : MonoBehaviour {
             //and connect to ship and old frontmost asteroid
             //b)
             //move asteroid to back of tail, create new hinge
-            finger=list;
+            Node finger=list;
             while(true)
             {
                 if(finger.next==null)
@@ -119,18 +115,39 @@ public class player : MonoBehaviour {
                 finger=finger.next;
             }
             //finger points at backmost asteroid
+            Transform backtransform=finger.asteroid.GetComponent<Transform>();
+            Transform additiontransform=other.GetComponent<Transform>();
+            additiontransform.position=backtransform.position-gameObject.transform.forward*distbehind;
             finger.asteroid.AddComponent<HingeJoint>();
             HingeJoint joint=finger.asteroid.GetComponent<HingeJoint>();
             joint.connectedBody=other.GetComponent<Rigidbody>();
             //gameObject.AddComponent<SpringJoint>();
             //SpringJoint joint=GetComponent<SpringJoint>();
             joint.anchor=new Vector3(0,0,-distbehind);
-            Transform backtransform=finger.asteroid.GetComponent<Transform>();
-            Transform additiontransform=other.GetComponent<Transform>();
-            additiontransform.position=backtransform.position-backtransform.forward*distbehind;
+            //asteroid has been attached to back
+            //finger still points at previous backmost asteroid, adding new
+            //asteroid to list
+            Node addition= new Node();
+            addition.asteroid=other;
+            finger.next=addition; 
       
         }
-
+        //asteroid is attached, now adding it to list
+        /*Node finger=null;
+        if( list==null)
+        {
+        }
+        else
+        {
+            finger=list;
+            while(true)
+            {
+                if(finger.next==null)
+                    break;
+                finger=finger.next;
+            }
+        }
+        */
         /*
         Debug.Log("In Attach");
         gameObject.AddComponent<ConfigurableJoint>();

@@ -8,24 +8,22 @@ public class DestroyAndCollect : MonoBehaviour {
 
     void Start()
     {
-        Debug.Log("Asteroid exists");
     }
+
 	void OnTriggerEnter(Collider other){
         Debug.Log("Colliding with: "+ other.tag);
 		if (other.gameObject.CompareTag("Boundary")) {
 			return;
 		}
-<<<<<<< HEAD
-        if(other.gameObject.CompareTag("Player"))
+        if((other.gameObject.CompareTag("Player1") || other.gameObject.CompareTag("Player2")) && gameObject.CompareTag("Uncollected") )
         {
-            Debug.Log("player collision handling");
+            Debug.Log("player attachment handling");
             //move behind
             Transform thistransform=GetComponent<Transform>();
             Transform othertransform=other.gameObject.GetComponent<Transform>();
             thistransform.position=othertransform.position - distbehind*othertransform.forward;
             other.gameObject.GetComponent<player>().attach(gameObject,distbehind);
         }
-=======
 		//If asteroid is uncollected
 
 		if (gameObject.tag == "Uncollected") {
@@ -34,15 +32,16 @@ public class DestroyAndCollect : MonoBehaviour {
 
 		if (gameObject.tag == "Player1") {
 			if (other.gameObject.tag == "Player2") {
+                Debug.Log("Player 2 takes damage");
 				FindObjectOfType<GameController> ().takeDamage (other.gameObject.tag);
 			}
 		} else if (gameObject.tag == "Player2") {
 			if (other.gameObject.tag == "Player1") {
+                Debug.Log("Player 1 takes damage");
 				FindObjectOfType<GameController> ().takeDamage (other.gameObject.tag);
 			}
 		}
 		//Should asteroids destroy each other?
 		Destroy (gameObject);
->>>>>>> a249855bb6773459a7334c6e4bac15970032cb54
 	}
 }

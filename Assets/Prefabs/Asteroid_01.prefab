@@ -24,10 +24,10 @@ GameObject:
   - component: {fileID: 136542909545865348}
   - component: {fileID: 114240199774419752}
   - component: {fileID: 54535237797179612}
-  - component: {fileID: 114091441390557632}
+  - component: {fileID: 114758791536687974}
   m_Layer: 0
   m_Name: Asteroid_01
-  m_TagString: Untagged
+  m_TagString: Uncollected
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,8 +38,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1750854936006178}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.04643921, y: 0.9632235, z: -0.14477862, w: 0.22154711}
+  m_LocalPosition: {x: 1.092236, y: -3.6501374, z: -0.000011103212}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -92,24 +92,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114091441390557632
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1750854936006178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 700f1525288ade24d95fbb52f240a018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distbehind: 0
 --- !u!114 &114240199774419752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -122,6 +110,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tumble: 5
+--- !u!114 &114758791536687974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1750854936006178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 700f1525288ade24d95fbb52f240a018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distbehind: 2
 --- !u!136 &136542909545865348
 CapsuleCollider:
   m_ObjectHideFlags: 1
