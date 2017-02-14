@@ -5,10 +5,10 @@ using UnityEngine;
 public class DestroyAndCollect : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
-		if (other.gameObject.CompareTag("Boundary")) {
+		if (other.CompareTag("Boundary")) {
 			return;
 		}
-        if(other.gameObject.CompareTag("Player"))
+        if(other.CompareTag("Player"))
         {
             Destroy(other);
             //other.gameObject.GetComponent<player>().attach(gameObject);
