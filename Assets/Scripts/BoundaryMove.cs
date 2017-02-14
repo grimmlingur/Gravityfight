@@ -17,7 +17,7 @@ public class BoundaryMove : MonoBehaviour {
 		offsetY = yBoundary - 1;
 	}
 
-	void FixedUpdate(){
+	void Update(){
 		xBoundary = transform.localScale.x / 2;
 		yBoundary = transform.localScale.y / 2;
 

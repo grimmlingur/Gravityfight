@@ -17,15 +17,20 @@ public class GameController : MonoBehaviour {
 	bool gameEnded 	 = false;
 	float audioTime  = 4;
 	float audioTimer = 7;
+	float time = 120;
 
 	GameObject[] UIObjects;
 	GameObject[] EndUIObjects;
 	GameObject[] MenuObjects;
 	AudioSource source;
 
+	void Awake(){
+		Time.timeScale = 0;	
+	}
+
 	// Use this for initialization
 	void Start () {
-		Time.timeScale = 0;
+
 		UIObjects    = GameObject.FindGameObjectsWithTag("GameUI");
 		EndUIObjects = GameObject.FindGameObjectsWithTag("EndUI");
 		MenuObjects  = GameObject.FindGameObjectsWithTag("Menu");
@@ -85,6 +90,20 @@ public class GameController : MonoBehaviour {
 		}
 
 		ambientMusic ();
+		timer ();
+	}
+
+	void timer(){
+		time -= Time.deltaTime;
+		if (time <= 0) {
+			if (player1Lives > player2Lives) {
+				displayWin (1);
+			} else if (player2Lives > player1Lives) {
+				displayWin (2);
+			} else {
+				displayWin (0);
+			}
+		}
 	}
 
 	void ambientMusic(){
@@ -132,8 +151,10 @@ public class GameController : MonoBehaviour {
 			if (i.name == "WinText") {
 				if (winner == 1) {
 					i.gameObject.GetComponent<Text> ().text = "Player 1 Wins!";
-				} else {
+				} else if (winner == 2) {
 					i.gameObject.GetComponent<Text> ().text = "Player 2 Wins!";
+				} else {
+					i.gameObject.GetComponent<Text> ().text = "Draw!";
 				}
 			}
 		}
