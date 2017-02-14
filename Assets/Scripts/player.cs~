@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class player : MonoBehaviour {
 
+<<<<<<< HEAD
     private class Node {
         public Node next;
         public GameObject asteroid;
@@ -20,10 +21,27 @@ public class player : MonoBehaviour {
         Debug.Log("Player exists");
         rb=GetComponent<Rigidbody>();
 
+=======
+	Vector3 originPoint;
+	float speed             = 5f;
+	float rotateSpeed       = 3f;
+	float invincibilityTime = 2f;
+	float respawnTime       = 1f;
+	int controls;
+
+
+	// Use this for initialization
+	void Start () {
+		//Gets the controlScheme for the player. GetControlScheme returns either 0 or 1 based on where the 
+		//player is in the gameworld. If 0 then the player uses asd to control and if 1 then he uses jkl.
+		controls = GetControlScheme.getControls (gameObject.transform.position.x);
+		originPoint = gameObject.transform.position;
+>>>>>>> a249855bb6773459a7334c6e4bac15970032cb54
 	}
 	
 	// Update is called once per frame
 	void Update () {
+<<<<<<< HEAD
 		//gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * speed * Time.deltaTime);
 		//gameObject.transform.position += gameObject.transform.forward * speed * Time.deltaTime;
         rb.velocity=gameObject.transform.forward*speed;
@@ -34,6 +52,24 @@ public class player : MonoBehaviour {
 		}
 		if(Input.GetKey(KeyCode.D)){
 			gameObject.transform.Rotate(new Vector3 (0, rotateSpeed, 0));
+=======
+		gameObject.transform.position += gameObject.transform.forward * speed * Time.deltaTime;
+		Debug.Log (gameObject.transform.forward);
+		if (controls == 0) {
+			if (Input.GetKey (KeyCode.A)) {
+				gameObject.transform.Rotate (new Vector3 (0, -rotateSpeed, 0));
+			}
+			if (Input.GetKey (KeyCode.D)) {
+				gameObject.transform.Rotate (new Vector3 (0, rotateSpeed, 0));
+			}
+		} else {
+			if (Input.GetKey (KeyCode.J)) {
+				gameObject.transform.Rotate (new Vector3 (0, -rotateSpeed, 0));
+			}
+			if (Input.GetKey (KeyCode.L)) {
+				gameObject.transform.Rotate (new Vector3 (0, rotateSpeed, 0));
+			}
+>>>>>>> a249855bb6773459a7334c6e4bac15970032cb54
 		}
         if(Input.GetKey(KeyCode.S)){
             //destroy all hinges in list and hinge on this object
@@ -49,6 +85,7 @@ public class player : MonoBehaviour {
         }
 	}
 
+<<<<<<< HEAD
     
     public void attach(GameObject other,float distbehind)
     { 
@@ -110,6 +147,7 @@ public class player : MonoBehaviour {
             Transform additiontransform=other.GetComponent<Transform>();
             additiontransform.position=backtransform.position-backtransform.forward*distbehind;
       
+        }
 
         /*
         Debug.Log("In Attach");
@@ -133,4 +171,15 @@ public class player : MonoBehaviour {
         */
     }
     
+=======
+	public void respawn(){
+		StartCoroutine(respawnCoroutine());
+	}
+
+	IEnumerator respawnCoroutine()
+	{
+		yield return new WaitForSeconds(respawnTime);
+		gameObject.transform.position = originPoint;
+	}
+>>>>>>> a249855bb6773459a7334c6e4bac15970032cb54
 }

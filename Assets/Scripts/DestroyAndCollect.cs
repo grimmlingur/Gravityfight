@@ -15,14 +15,31 @@ public class DestroyAndCollect : MonoBehaviour {
 		if (other.gameObject.CompareTag("Boundary")) {
 			return;
 		}
-        if(other.gameObject.CompareTag("Player"))
+        if((other.gameObject.CompareTag("Player1") || other.gameObject.CompareTag("Player2")) && gameObject.CompareTag("Uncollected") )
         {
-            Debug.Log("player collision handling");
+            Debug.Log("player attachment handling");
             //move behind
             Transform thistransform=GetComponent<Transform>();
             Transform othertransform=other.gameObject.GetComponent<Transform>();
             thistransform.position=othertransform.position - distbehind*othertransform.forward;
             other.gameObject.GetComponent<player>().attach(gameObject,distbehind);
         }
+		//If asteroid is uncollected
+
+		if (gameObject.tag == "Uncollected") {
+			return;
+		}
+
+		if (gameObject.tag == "Player1") {
+			if (other.gameObject.tag == "Player2") {
+				FindObjectOfType<GameController> ().takeDamage (other.gameObject.tag);
+			}
+		} else if (gameObject.tag == "Player2") {
+			if (other.gameObject.tag == "Player1") {
+				FindObjectOfType<GameController> ().takeDamage (other.gameObject.tag);
+			}
+		}
+		//Should asteroids destroy each other?
+		Destroy (gameObject);
 	}
 }
